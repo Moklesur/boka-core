@@ -66,18 +66,18 @@ if (!class_exists('Boka_Elementor_Addons')) :
         private function setup_constants() {
 
             // Plugin Folder Path
-            if (!defined('Bringback_PLUGIN_DIR')) {
-                define('Bringback_PLUGIN_DIR', plugin_dir_path(__FILE__));
+            if (!defined('Boka_PLUGIN_DIR')) {
+                define('Boka_PLUGIN_DIR', plugin_dir_path(__FILE__));
             }
 
             // Plugin Folder URL
-            if (!defined('Bringback_PLUGIN_URL')) {
-                define('Bringback_PLUGIN_URL', plugin_dir_url(__FILE__));
+            if (!defined('Boka_PLUGIN_URL')) {
+                define('Boka_PLUGIN_URL', plugin_dir_url(__FILE__));
             }
 
             // Plugin Folder Path
-            if (!defined('Bringback_ADDONS_DIR')) {
-                define('Bringback_ADDONS_DIR', plugin_dir_path(__FILE__) . 'widgets/');
+            if (!defined('Boka_ADDONS_DIR')) {
+                define('Boka_ADDONS_DIR', plugin_dir_path(__FILE__) . 'elementor-addons/');
             }
 
         }
@@ -89,7 +89,7 @@ if (!class_exists('Boka_Elementor_Addons')) :
         private function includes() {
 
 
-//            require_once Bringback_PLUGIN_DIR . 'includes/helper-functions.php';
+//            require_once Boka_PLUGIN_DIR . 'includes/helper-functions.php';
 
         }
 
@@ -121,14 +121,14 @@ if (!class_exists('Boka_Elementor_Addons')) :
 
         public function add_material_icons_tabs( $tabs = array() ) {
 
-            $tabs['bringbackicon'] = array(
-                'name'          => 'bringbackicon',
-                'label'         => esc_html__( 'Bringback', 'boka' ),
+            $tabs['bokaicon'] = array(
+                'name'          => 'bokaicon',
+                'label'         => esc_html__( 'Boka', 'boka' ),
                 'labelIcon'     => 'flaticon-check',
                 'prefix'        => 'flaticon-',
                 'displayPrefix' => 'boka',
-                'url'           => Bringback_PLUGIN_URL . 'assets/css/boka/icons/flaticon.css',
-                'fetchJson'     => Bringback_PLUGIN_URL . 'assets/css/boka/icons/bringback.json',
+                'url'           => Boka_PLUGIN_URL . 'assets/css/boka/icons/flaticon.css',
+                'fetchJson'     => Boka_PLUGIN_URL . 'assets/css/boka/icons/boka.json',
                 'ver'           => '3.0.1',
             );
             return $tabs;
@@ -141,27 +141,27 @@ if (!class_exists('Boka_Elementor_Addons')) :
         public function register_frontend_scripts() {
             foreach( glob( BOKA_PLUG_DIR. 'assets/js/*.js' ) as $file ) {
                 $filename = substr($file, strrpos($file, '/') + 1);
-                wp_enqueue_script( $filename, Bringback_PLUGIN_URL . 'assets/js/'.$filename, array('jquery'), BOKA_VERSION, true);
+                wp_enqueue_script( $filename, Boka_PLUGIN_URL . 'assets/js/'.$filename, array('jquery'), BOKA_VERSION, true);
             }
         }
 
         public function register_elementor_editor_css() {
-            wp_enqueue_style( 'elementor-custom-editor', Bringback_PLUGIN_URL . 'assets/elementor/elementor-custom-editor.css');
+            wp_enqueue_style( 'elementor-custom-editor', Boka_PLUGIN_URL . 'assets/elementor/elementor-custom-editor.css');
         }
 
         public function register_frontend_styles() {
 
             foreach( glob( BOKA_PLUG_DIR. 'assets/css/*.css' ) as $file ) {
                 $filename = substr($file, strrpos($file, '/') + 1);
-                wp_enqueue_style( $filename, Bringback_PLUGIN_URL . 'assets/css/'.$filename);
-                wp_enqueue_style( 'bringback-icon', Bringback_PLUGIN_URL . 'assets/css/bringback/icons/flaticon.css');
+                wp_enqueue_style( $filename, Boka_PLUGIN_URL . 'assets/css/'.$filename);
+                wp_enqueue_style( 'boka-icon', Boka_PLUGIN_URL . 'assets/css/boka/icons/flaticon.css');
             }
         }
         public function add_elementor_category() {
             \Elementor\Plugin::instance()->elements_manager->add_category(
-                'bring_back',
+                'boka',
                 array(
-                    'title' => __('Bringback Addons', 'boka'),
+                    'title' => __('Boka Addons', 'boka'),
                     'icon' => 'fa fa-plug',
                 ),
                 1);
@@ -169,7 +169,7 @@ if (!class_exists('Boka_Elementor_Addons')) :
         
         public function include_widgets($widgets_manager) {
             $widgets[] = '';
-            foreach( glob( BOKA_PLUG_DIR. 'includes/widgets/*' ) as $file ) {
+            foreach( glob( BOKA_PLUG_DIR. 'includes/elementor-addons/*' ) as $file ) {
 
                 $widgets[] = substr($file, strrpos($file, '/') + 1);
             }
@@ -178,7 +178,7 @@ if (!class_exists('Boka_Elementor_Addons')) :
                 $widgets = array_filter($widgets);
                 foreach ($widgets as $key => $value){
                     if (!empty($value)) {
-                        require_once Bringback_ADDONS_DIR . ''.$value.'/index.php';
+                        require_once Boka_ADDONS_DIR . ''.$value.'/index.php';
                     }
                     
                 }
@@ -199,14 +199,14 @@ endif; // End if class_exists check
  * Use this function like you would a global variable, except without needing
  * to declare the global.
  *
- * Example: <?php $ae = Bringback(); ?>
+ * Example: <?php $ae = Boka(); ?>
  */
-function Bringback() {
+function Boka() {
     return Boka_Elementor_Addons::instance();
 }
 
-// Get Bringback Running
-Bringback();
+// Get Boka Running
+Boka();
 
 
 
