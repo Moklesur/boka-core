@@ -84,7 +84,7 @@ class Boka_Title extends Widget_Base {
      * @access protected
      */
 
-    protected function _register_controls() {
+    protected function register_controls() {
 
         $this->start_controls_section(
             'boka_title_section',

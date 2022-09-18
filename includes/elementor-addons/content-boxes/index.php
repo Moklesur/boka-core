@@ -84,7 +84,7 @@ class Boka_Content_Boxes extends Widget_Base {
      * @access protected
      */
 
-    protected function _register_controls() {
+    protected function register_controls() {
 
         $this->start_controls_section(
             'boka_content_boxes_section',
